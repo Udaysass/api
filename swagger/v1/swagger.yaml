@@ -1,0 +1,107 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/projects":
+    post:
+      summary: 'create a project '
+      tags:
+      - Projects
+      parameters:
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: description
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: project found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                required:
+                - name
+                - description
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                required:
+                - name
+                - description
+        '404':
+          description: project not found
+        '406':
+          description: unsupported accept header
+  "/projects/{id}":
+    get:
+      summary: Retrieves a project
+      tags:
+      - Projects
+      - Another Tag
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: project found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                required:
+                - id
+                - name
+                - description
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                required:
+                - id
+                - name
+                - description
+        '404':
+          description: project not found
+        '406':
+          description: unsupported accept header
+servers:
+- url: http://localhost:3000/
+  variables:
+    defaultHost:
+      default: http://localhost:3000/
